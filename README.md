@@ -9,16 +9,16 @@
             <div class="title" style="width: 35%;height: 13vh;font-family: 'Microsoft YaHei UI';font-size: 5vw;font-weight: 700;color: #99cee5d1;text-align: center;margin-top: 5vh;margin-left: 32.5%;text-shadow: 3px 7px 1px #3f6a8f8a, -1px 3px 16px #e0d6d6;border: 0px solid red;float: left;" >
                 帮助文件
             </div>
-            本程序需要.net6.0 sdk
-            IDE为Visual Studio 2022
-            文件夹说明
-            DataAccess 为数据访问库
-            SetupFiles 为安装程序压缩包
-            Snowflake.Net 为雪花ID组件
-            TestProject 为测试项目
-            WpfNetMusic为项目主体
-            WpfNetMusic.sln 为解决方案文件
-            WpfNetMusicDB.db 为必须的Sqlite文件安装好程序后放在程序安装目录的根目录即可
+            本程序需要.net6.0 sdk<br/>
+            IDE为Visual Studio 2022<br/>
+            文件夹说明<br/>
+            DataAccess 为数据访问库<br/>
+            SetupFiles 为安装程序压缩包<br/>
+            Snowflake.Net 为雪花ID组件<br/>
+            TestProject 为测试项目<br/>
+            WpfNetMusic为项目主体<br/>
+            WpfNetMusic.sln 为解决方案文件<br/>
+            WpfNetMusicDB.db 为必须的Sqlite文件安装好程序后放在程序安装目录的根目录即可<br/>
             <div class="Label">
                 启动页
             </div>

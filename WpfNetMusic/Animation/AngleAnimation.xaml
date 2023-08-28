@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--  唱片旋转动画  -->
+    <Storyboard x:Key="DiscAnimation" RepeatBehavior="Forever">
+        <DoubleAnimation
+            BeginTime="00:00:00"
+            Storyboard.TargetName="AngleRotate"
+            Storyboard.TargetProperty="AngleX"
+            From="0"
+            To="360"
+            Duration="00:00:02" />
+    </Storyboard>
+</ResourceDictionary>

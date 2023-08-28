@@ -1,0 +1,169 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.0": {
+      "DataAccess/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccess.dll": {}
+        }
+      },
+      "Snowflake.Net/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/Snowflake.Net.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Snowflake.Net.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win7-x86": {
+      "DataAccess/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccess.dll": {}
+        }
+      },
+      "Snowflake.Net/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/Snowflake.Net.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Snowflake.Net.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../DataAccess/DataAccess.csproj",
+      "msbuildProject": "../DataAccess/DataAccess.csproj"
+    },
+    "Snowflake.Net/1.0.0": {
+      "type": "project",
+      "path": "../Snowflake.Net/Snowflake.Net.csproj",
+      "msbuildProject": "../Snowflake.Net/Snowflake.Net.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.0": [
+      "DataAccess >= 1.0.0",
+      "Snowflake.Net >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\yms12\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\WPFProject\\WpfNetMusic\\WpfNetMusic\\WpfNetMusic.csproj",
+      "projectName": "WpfNetMusic",
+      "projectPath": "D:\\WPFProject\\WpfNetMusic\\WpfNetMusic\\WpfNetMusic.csproj",
+      "packagesPath": "C:\\Users\\yms12\\.nuget\\packages\\",
+      "outputPath": "D:\\WPFProject\\WpfNetMusic\\WpfNetMusic\\obj\\",
+      "projectStyle": "PackageReference",
+      "crossTargeting": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\yms12\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.cdn.azure.cn/v3/index.json": {}
+      },
+      "frameworks": {
+        "net40": {
+          "targetAlias": "net6.0-windows",
+          "projectReferences": {
+            "D:\\WPFProject\\WpfNetMusic\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "D:\\WPFProject\\WpfNetMusic\\DataAccess\\DataAccess.csproj"
+            },
+            "D:\\WPFProject\\WpfNetMusic\\Snowflake.Net\\Snowflake.Net.csproj": {
+              "projectPath": "D:\\WPFProject\\WpfNetMusic\\Snowflake.Net\\Snowflake.Net.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net40": {
+        "targetAlias": "net6.0-windows",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win7-x86": {
+        "#import": []
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DataAccess 与 net40 (.NETFramework,Version=v4.0) 不兼容。 项目 DataAccess 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "DataAccess",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 Snowflake.Net 与 net40 (.NETFramework,Version=v4.0) 不兼容。 项目 Snowflake.Net 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Snowflake.Net",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DataAccess 与 net40 (.NETFramework,Version=v4.0) / win7-x86 不兼容。 项目 DataAccess 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "DataAccess",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0/win7-x86"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 Snowflake.Net 与 net40 (.NETFramework,Version=v4.0) / win7-x86 不兼容。 项目 Snowflake.Net 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Snowflake.Net",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0/win7-x86"
+      ]
+    }
+  ]
+}

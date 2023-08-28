@@ -1,0 +1,88 @@
+﻿<Window
+    x:Class="WpfNetMusic.LyricMusic"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:WpfNetMusic"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="LyricMusic"
+    Width="auto"
+    Height="135"
+    AllowsTransparency="True"
+    Background="#A3FFFFFF"
+    MouseDown="Window_MouseDown"
+    ResizeMode="NoResize"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <local:WindowDragBehavior />
+    </i:Interaction.Behaviors>
+    <Grid Background="#25000000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Width="70"
+            Height="30"
+            Orientation="Horizontal">
+            <Image
+                Width="20"
+                Height="20"
+                Margin="7,3,0,0"
+                HorizontalAlignment="Right"
+                Cursor="Hand"
+                MouseDown="Image_MouseDown_1"
+                Source="/Image/folder.png"
+                ToolTip="打开歌词文件" />
+            <Image
+                Width="20"
+                Height="20"
+                Margin="7,3,0,0"
+                HorizontalAlignment="Right"
+                Cursor="Hand"
+                MouseDown="Image_MouseDown"
+                Source="/Image/CloseIcon-01.png"
+                ToolTip="关闭歌词显示" />
+        </StackPanel>
+        <!--#region 歌词显示-->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="auto"
+            Height="65">
+            <ListBox
+                Width="auto"
+                Height="65"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                ItemsSource="{Binding Lyrics}">
+                <ListBox.Template>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Viewbox>
+                            <TextBlock
+                                Width="3"
+                                Height="7"
+                                Margin="1,3,0,0"
+                                FontSize="3"
+                                Foreground="{Binding Color}"
+                                Text="{Binding Char}" />
+                        </Viewbox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <!--#endregion-->
+    </Grid>
+</Window>

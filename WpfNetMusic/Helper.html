@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/scrollbar.css"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <title>Yam Music Player Helper-Yam 音乐播放器帮助文件-v1.0</title>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #EBEEF2;
+            overflow: hidden;
+        }
+
+        #MainDiv {
+            width: 100%;
+            height: 100%;
+            border: 0px solid red;
+        }
+
+        #ContentDiv {
+            width: 100%;
+            height: 85%;
+            border: 0px solid red;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+            #ContentDiv .title {
+                width: 35%;
+                height: 13vh;
+                font-family: 'Microsoft YaHei UI';
+                font-size: 5vw;
+                font-weight: 700;
+                color: #99cee5d1;
+                text-align: center;
+                margin-top: 5vh;
+                margin-left: 32.5%;
+                text-shadow: 3px 7px 1px #3f6a8f8a, -1px 3px 16px #e0d6d6;
+                border: 0px solid red;
+                float: left;
+            }
+
+            #ContentDiv .Label {
+                width: 18%;
+                height: 5vh;
+                font-family: 'Microsoft YaHei UI';
+                font-size: 3vh;
+                color: #1f6ad0b0;
+                text-align: left;
+                text-indent: 1.5vw;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                margin-top: 2vw;
+                margin-left: 15%;
+                margin-bottom: 1vw;
+                border-left: 0px solid #808080;
+                border-bottom: 0px solid #808080;
+                border-top: 0px;
+                border-right: 0px;
+                border-radius: 10px;
+                box-shadow: inset 13px -3px 0px 0px #195dba40;
+                float: left;
+            }
+
+            #ContentDiv .Content {
+                width: 75%;
+                line-height: 35px;
+                min-height: 235px;
+                height: auto !important;
+                font-family: 'STKaiti';
+                font-size: 19px;
+                color: #aba5a5;
+                margin-top: 1%;
+                text-indent: 50px;
+                text-align: left;
+                margin-left: 12.5%;
+                margin-bottom: 1%;
+                border: 0px solid red;
+                float: left;
+            }
+
+                #ContentDiv .Content .imgContainer {
+                    width:100%;
+                    min-height:65px;
+                    height:auto !important;
+                    float:left;
+                }
+
+                    #ContentDiv .Content .imgContainer img {
+                        margin-left: 2%;
+                        width: 64vw;
+                        height: 41vh;
+                    }
+
+                .markednessTag {
+                    font-family: 'FZShuTi';
+                    font-weight: 700;
+                    color: red;
+                    font-size: 23px;
+                }
+
+        .navbar {
+            width: 100%;
+            height: 8vh;
+            background-color: #f8f8f8;
+            border-color: #e7e7e7;
+            margin-top: 0;
+            margin-left: 0;
+        }
+
+            .navbar .title-container {
+                width: 95vw;
+                height: 5vh;
+                margin-top: 1vh;
+                margin-left: 3vw;
+                float: left;
+                border: 0px solid red;
+            }
+
+            .navbar .title-container .logo {
+                width: 26px;
+                height: 26px;
+                margin-top: 0.7vh;
+                margin-left: 1vw;
+                float:left;
+            }
+
+            .navbar .title-container .title {
+                width: 75%;
+                height: 5vh;
+                line-height:5vh;
+                font-family: 'Microsoft YaHei UI';
+                font-size: 3vh;
+                color: #427e60de;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-top: 0.2vh;
+                margin-left: 1vw;
+                margin-right: 1vw;
+                border:0px solid red;
+                float: left;
+            }
+
+        .bigLogo {
+            width: 75%;
+            height: 30vw;
+            margin-top: 5vh;
+            margin-left: 12.5%;
+            border-radius:25px;
+            float:left;
+        }
+    </style>
+    <script type="text/javascript">
+        var screenWidth;
+        var screenHeight;
+        $(function () {
+            MainDivOnResize();
+            $(window).resize(function () {
+                MainDivOnResize();
+            });
+        });
+        function MainDivOnResize() {
+            screenWidth = document.body.clientWidth;
+            screenHeight = document.body.clientHeight;
+            var navbarHeight = $(".navbar").height();
+            var ContentDivHeight = screenHeight - navbarHeight;
+            $("#ContentDiv").css("height", ContentDivHeight+"px");
+            $("#MainDiv").css({ "width": screenWidth+"px", "height": screenHeight+"px" });
+        }
+    </script>
+</head>
+<body>
+    <div id="MainDiv">
+        <div class="navbar">
+            <div class="title-container">
+                <img class="logo" src="Image/Logo.png" />
+                <div class="title">Yam Music Player Helper-Yam 音乐播放器帮助文件-v1.0</div>
+            </div>
+        </div>
+        <div id="ContentDiv">
+            <img class="bigLogo" src="Image/SplashScreenBG.png" />
+            <div class="title">
+                帮助文件
+            </div>
+            <div class="Label">
+                启动页
+            </div>
+            <div class="Content">
+                当程序启动时会弹出是否全盘搜索的对话框,选择全盘搜索之后会搜索电脑里的所有MP3文件，
+                <span class="markednessTag">注意:如果选择全盘搜索,此过程较为漫长</span>建议选择文
+                件夹进行搜索<br />
+                <div class="imgContainer">
+                    <img src="Image/HelpImage/img01.png" />
+                </div>
+                选择否会弹出文件夹选择窗口，选择存有mp3文件的文件夹然后点击确定，程序就会开始解析mp3文件<br />
+                <div class="imgContainer">
+                    <img style="margin-left:2%;" src="Image/HelpImage/img02.png" />
+                </div>
+                之后启动页就开始分析文件夹里找到的mp3文件<br />
+                <div class="imgContainer">
+                    <img style="margin-left:2%;" src="Image/HelpImage/img04.png" />
+                </div>
+                如果找到的文件中有错误文件就会弹出错误消息对话框<br />
+                <div class="imgContainer">
+                    <img style="margin-left:2%;width:64vw;height:41vh;" src="Image/HelpImage/img03.png" />
+                </div>
+            </div>
+            <div class="Label">
+                主界面
+            </div>
+            <div class="Content">
+                主界面的显示如下图<br />
+                <div class="imgContainer">
+                    <img style="margin-left:2%;" src="Image/HelpImage/img05.png" />
+                </div>
+                1、标题栏区域,从左到右依次为<br />
+                &nbsp;&nbsp;1 程序的图标和标题<br />
+                &nbsp;&nbsp;1.2 搜索当前歌单列表歌曲(输入关键字按下回车开始搜索)<br />
+                &nbsp;&nbsp;1.3 主菜单按钮(点击弹出主菜单)<br />
+                &nbsp;&nbsp;1.4 最小化<br />
+                &nbsp;&nbsp;1.5 最大化<br />
+                &nbsp;&nbsp;1.6 关闭窗口<br />
+                2、提示和批量添加区域，从左到右依次为<br />
+                &nbsp;&nbsp;2.1 显示批量添加的文件夹路径的文本框<br />
+                &nbsp;&nbsp;2.2 浏览批要量添加的文件夹(选择后自动添加选中文件夹中的音乐到当前歌单)<br />
+                &nbsp;&nbsp;2.3 当前正在播放的歌单名称<br />
+                3、当前歌单的音乐列表,鼠标双击其中一项则开始播放选中的音乐,鼠标右键单击弹出的快捷菜单可以对音乐进行操作<br />
+                4、歌单列表,鼠标单击右键可以对歌单进行操作<br />
+                <span class="markednessTag">注意:默认歌单不可删除,一定要删除必须指定其他歌单为默认歌单即可删除</span><br />
+                5、播放控制区域,从左到右依次为<br />
+                &nbsp;&nbsp;5.1当前播放歌曲显示<br />
+                &nbsp;&nbsp;5.2播放顺序控制按钮 <br />
+                &nbsp;&nbsp;5.3上一首歌曲按钮<br />
+                &nbsp;&nbsp;5.4播放和暂停按钮(双击播放或暂停播放)<br />
+                &nbsp;&nbsp;5.5下一首歌曲按钮<br />
+                &nbsp;&nbsp;5.6歌词显示按钮,歌词格式为ylrc<br />
+                &nbsp;&nbsp;&nbsp;歌词文件的内容如下<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;[00:19.64]あの日見渡した渚を<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;[00:24.50]今も思い出すんだ<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;[00:19.64]代表歌词出现的时间,格式为[分钟:秒钟.毫秒]<br />
+                &nbsp;&nbsp;5.7为音量条件按钮,可以条件系统的音量
+                6、歌曲进度条控件，拖动控制点可以调整播放进度<br />
+            </div>
+            <div class="Label">
+                拖拽添加歌曲
+            </div>
+            <div class="Content">
+                可以通过将外部文件鼠标拖拽到歌曲列表添加歌曲<br />
+                <div class="imgContainer">
+                    <img style="margin-left:2%;" src="Image/HelpImage/img06.gif" />
+                </div>
+            </div>
+            <div class="Label">
+                拖拽移动歌曲到歌单
+            </div>
+            <div class="Content">
+                可以在歌单列表单击鼠标拖拽歌曲文件到歌单列表进行移动<br />
+                <div class="imgContainer">
+                    <img style="margin-left:2%;" src="Image/HelpImage/img07.gif" />
+                </div>
+            </div>
+        </div>
+</body>
+</html>

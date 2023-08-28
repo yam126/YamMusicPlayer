@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="WpfNetMusic.UserControl.ImageButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfNetMusic.UserControl"
+             mc:Ignorable="d" >
+    <Grid>
+        <Image Margin="0" Name="imageBtn" Stretch="Fill" MouseLeftButtonDown="imageBtn_MouseLeftButtonDown" MouseLeftButtonUp="imageBtn_MouseLeftButtonUp" MouseLeave="imageBtn_MouseLeave" MouseEnter="imageBtn_MouseEnter" />
+        <Label Margin="0" Name="labelBtn" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"></Label>
+    </Grid>
+</UserControl>

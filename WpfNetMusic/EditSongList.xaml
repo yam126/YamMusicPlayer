@@ -1,0 +1,179 @@
+﻿<Window
+    x:Class="WpfNetMusic.EditSongList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:WpfNetMusic"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="编辑歌单"
+    Width="300"
+    Height="210"
+    MouseDown="Window_MouseDown"
+    ResizeMode="NoResize"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Window">
+                        <Border
+                            BorderBrush="#FF229DBE"
+                            BorderThickness="2"
+                            CornerRadius="8"
+                            Opacity="1">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="#FFFFFF" />
+                                    <GradientStop Offset="1" Color="#FFFFFF" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <i:Interaction.Behaviors>
+        <local:WindowDragBehavior />
+    </i:Interaction.Behaviors>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--  标题栏  -->
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="#4791EB">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Padding="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="25"
+                Foreground="#FFFCFCFC"
+                Text="编辑歌单" />
+            <Image
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="20"
+                Height="20"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Right"
+                Cursor="Hand"
+                MouseDown="Image_MouseDown"
+                Source="/Image/CloseIcon-01.png" />
+        </Grid>
+        <!--  /标题栏  -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.17*" />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="260"
+                Height="112"
+                Orientation="Vertical">
+                <TextBlock
+                    Margin="0,6,0,0"
+                    HorizontalAlignment="Center"
+                    FontSize="21"
+                    Text="请输入歌单名称" />
+                <TextBox
+                    x:Name="tbSongListName"
+                    Width="230"
+                    Height="28"
+                    Margin="0,5,0,0"
+                    Padding="5,3,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Text="{Binding SongName}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="11" />
+                            <Setter Property="BorderBrush" Value="#c1d0dc" />
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <StackPanel
+                    Width="260"
+                    Height="30"
+                    Margin="0,9,0,0"
+                    Orientation="Horizontal">
+                    <CheckBox
+                        Width="15"
+                        Height="15"
+                        Margin="15,3,0,0"
+                        IsChecked="{Binding IsDefault}" />
+                    <TextBlock
+                        Margin="9,1,0,0"
+                        HorizontalAlignment="Center"
+                        FontSize="21"
+                        Text="是否默认歌单" />
+                </StackPanel>
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    x:Name="btnCancel"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Width="95"
+                    Height="31"
+                    Background="#FF843D7D"
+                    Click="btnCancel_Click"
+                    Content="取消"
+                    Cursor="Hand"
+                    FontSize="15"
+                    Foreground="White">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8" />
+                            <Setter Property="BorderBrush" Value="#c1d0dc" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
+                    x:Name="btnConfirm"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="95"
+                    Height="31"
+                    Background="#FF3B50B5"
+                    Click="btnConfirm_Click"
+                    Content="确定"
+                    Cursor="Hand"
+                    FontSize="15"
+                    Foreground="White">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8" />
+                            <Setter Property="BorderBrush" Value="#c1d0dc" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

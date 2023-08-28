@@ -1,0 +1,119 @@
+﻿<Window
+    x:Class="WpfNetMusic.SplashScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:WpfNetMusic"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="SplashScreen"
+    Width="800"
+    Height="450"
+    Loaded="Window_Loaded"
+    SizeChanged="Window_SizeChanged"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <!--  StoryBoard动画组件  -->
+        <!--  RepeatBehavior重复方式  -->
+        <Storyboard x:Key="FunAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation
+                BeginTime="00:00:00"
+                Storyboard.TargetName="FunRotate"
+                Storyboard.TargetProperty="Angle"
+                From="0"
+                To="360"
+                Duration="00:00:02" />
+        </Storyboard>
+        <Storyboard x:Key="LocalAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation
+                BeginTime="00:00:00"
+                Storyboard.TargetName="Localx"
+                Storyboard.TargetProperty="X"
+                From="0"
+                To="800"
+                Duration="00:00:02" />
+        </Storyboard>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="/Image/SplashScreenBG.png" />
+    </Window.Background>
+    <i:Interaction.Behaviors>
+        <local:WindowDragBehavior />
+    </i:Interaction.Behaviors>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.09*" />
+            <RowDefinition Height="0.05*" />
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="0" Grid.Column="0">
+            <Viewbox.OpacityMask>
+                <ImageBrush ImageSource="/Image/SplashScreenBG.png" />
+            </Viewbox.OpacityMask>
+            <Image
+                x:Name="SplashScreenBG"
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="1069"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Source="/Image/SplashScreenBG.png"
+                Visibility="Hidden" />
+        </Viewbox>
+        <TextBlock
+            x:Name="tbTips"
+            Grid.Row="1"
+            Grid.Column="0"
+            Padding="6,2,0,0"
+            Background="#7F253A8A"
+            FontFamily="Microsoft YaHei UI Light"
+            FontSize="21"
+            FontWeight="ExtraBold"
+            Foreground="White"
+            Text="{Binding TipsStr}" />
+        <ProgressBar
+            x:Name="MainProgress"
+            Grid.Row="2"
+            Grid.Column="0"
+            Width="800"
+            Height="15"
+            Margin="0,2,0,0"
+            BorderBrush="{x:Null}"
+            Value="0">
+            <ProgressBar.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#FFE8E4E4" />
+                    <GradientStop Offset="1" Color="#4CD0E3C2" />
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+            <ProgressBar.Foreground>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" />
+                            <SkewTransform CenterX="0.5" CenterY="0.5" />
+                            <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <LinearGradientBrush.Transform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform x:Name="FunRotate" Angle="80" />
+                            <TranslateTransform x:Name="Localx" X="17" />
+                        </TransformGroup>
+                    </LinearGradientBrush.Transform>
+                    <GradientStop Offset="0.624" Color="#FFEBE8E0" />
+                    <GradientStop Offset="1" Color="#FF3EDD98" />
+                    <GradientStop Offset="0.016" Color="#FF3EDD98" />
+                    <GradientStop Offset="0.447" Color="#4CD0DFD3" />
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+    </Grid>
+</Window>

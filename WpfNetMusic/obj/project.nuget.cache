@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "dgSpecHash": "G0dI+HTG/h+LNQDWJ7dfQ8Seg2mdIv+mF+2N9SNutkpHrHfF+jIXns7w3xbXYqa2+amexHrwSjCr1ql62elPDA==",
+  "success": false,
+  "projectFilePath": "D:\\WPFProject\\WpfNetMusic\\WpfNetMusic\\WpfNetMusic.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DataAccess 与 net40 (.NETFramework,Version=v4.0) 不兼容。 项目 DataAccess 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "DataAccess",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 Snowflake.Net 与 net40 (.NETFramework,Version=v4.0) 不兼容。 项目 Snowflake.Net 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Snowflake.Net",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DataAccess 与 net40 (.NETFramework,Version=v4.0) / win7-x86 不兼容。 项目 DataAccess 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "DataAccess",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0/win7-x86"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 Snowflake.Net 与 net40 (.NETFramework,Version=v4.0) / win7-x86 不兼容。 项目 Snowflake.Net 支持: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Snowflake.Net",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0/win7-x86"
+      ]
+    }
+  ]
+}

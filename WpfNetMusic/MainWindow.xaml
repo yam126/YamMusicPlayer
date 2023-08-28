@@ -1,0 +1,1019 @@
+﻿<Window
+    x:Class="WpfNetMusic.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:WpfNetMusic"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="MainWindowHandle"
+    Title="MainWindow"
+    Width="900"
+    Height="650"
+    Icon="/Image/Logo.png"
+    Loaded="Window_Loaded"
+    MouseDown="Window_MouseDown"
+    MouseMove="MainWindowHandle_MouseMove"
+    MouseUp="MainWindowHandle_MouseUp"
+    StateChanged="Window_StateChanged"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <!--#region 歌曲列表右键菜单-->
+        <ContextMenu x:Key="DataGridPopMenu">
+            <MenuItem
+                Name="MoveSongList"
+                Click="MoveSongList_Click"
+                Header="移动到歌单" />
+            <MenuItem
+                Name="DeleteMusic"
+                Click="DeleteMusic_Click"
+                Header="删除歌曲" />
+        </ContextMenu>
+        <!--#endregion-->
+        <!--#region 歌单列表-->
+        <ContextMenu x:Key="SongListPopMenu">
+            <MenuItem
+                Name="AddSongList"
+                Click="AddSongList_Click"
+                Header="添加歌单" />
+            <MenuItem
+                Name="RenameSongList"
+                Click="RenameSongList_Click"
+                Header="重命名歌单" />
+            <MenuItem
+                Name="DeleteSongList"
+                Click="DeleteSongList_Click"
+                Header="删除歌单" />
+        </ContextMenu>
+        <!--#endregion-->
+        <!--#region 唱片旋转动画-->
+        <Storyboard x:Key="DiscAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation
+                BeginTime="00:00:00"
+                Storyboard.TargetName="AngleRotate"
+                Storyboard.TargetProperty="Angle"
+                From="0"
+                To="360"
+                Duration="00:00:02" />
+        </Storyboard>
+        <!--#endregion-->
+    </Window.Resources>
+    <i:Interaction.Behaviors>
+        <local:WindowDragBehavior />
+    </i:Interaction.Behaviors>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <!--#region 标题栏-->
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="#4791EB"
+            Cursor="Hand"
+            MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="45"
+                Height="45"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/Image/Logo.png"
+                Stretch="Fill" />
+            <TextBlock
+                Grid.Column="1"
+                Width="175"
+                Height="30"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontFamily="Microsoft YaHei UI"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="YAM Music Player"
+                TextWrapping="Wrap" />
+            <TextBox
+                x:Name="txtSearch"
+                Grid.Column="2"
+                Width="175"
+                Height="20"
+                Margin="30,0,0,0"
+                Padding="8,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                KeyDown="txtSearch_KeyDown"
+                MouseDown="txtSearch_MouseDown"
+                MouseEnter="txtSearch_MouseEnter"
+                MouseLeave="txtSearch_MouseLeave"
+                Text=""
+                TextAlignment="Left"
+                TextWrapping="Wrap">
+                <TextBox.Resources>
+                    <VisualBrush
+                        x:Key="HintText"
+                        AlignmentX="Left"
+                        Opacity="0"
+                        Stretch="None"
+                        TileMode="None">
+                        <VisualBrush.Visual>
+                            <TextBlock
+                                FontSize="11"
+                                FontStyle="Italic"
+                                Foreground="#FFCB3D3D"
+                                Text="双击进入选择" />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource HintText}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background" Value="{StaticResource HintText}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="11" />
+                        <Setter Property="BorderBrush" Value="#c1d0dc" />
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Background>
+                    <SolidColorBrush Opacity="0.26" Color="White" />
+                </TextBox.Background>
+            </TextBox>
+            <TextBlock
+                x:Name="txtSearchHit"
+                Grid.Column="2"
+                Margin="42,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontStyle="Italic"
+                Foreground="#FFEEDCDC"
+                Text="搜索当前歌单音乐"
+                TextWrapping="Wrap" />
+            <Image
+                x:Name="btnMainMenu"
+                Grid.Column="3"
+                Width="20"
+                Height="20"
+                Margin="3,5,0,0"
+                Cursor="Hand"
+                MouseDown="btnMainMenu_MouseDown"
+                OpacityMask="#FFF7F7F7"
+                Source="/Image/WhiteMenuIcon.png" />
+            <Image
+                Grid.Column="4"
+                Width="20"
+                Height="20"
+                Margin="3,5,0,0"
+                Cursor="Hand"
+                MouseDown="MinIcon_MouseDown"
+                OpacityMask="#FFF7F7F7"
+                Source="/Image/MinCloseIcon-01.png"
+                Stretch="Fill" />
+            <Image
+                x:Name="NormalMaxBtn"
+                Grid.Column="5"
+                Width="20"
+                Height="20"
+                Margin="3,5,0,0"
+                Cursor="Hand"
+                MouseDown="MaxIcon_MouseDown"
+                OpacityMask="#FFF7F7F7"
+                Source="/Image/MaxIcon-01.png"
+                Stretch="Fill" />
+            <Image
+                Grid.Column="6"
+                Width="20"
+                Height="20"
+                Margin="3,5,0,0"
+                Cursor="Hand"
+                MouseDown="Close_MouseDown"
+                OpacityMask="#FFF7F7F7"
+                Source="/Image/CloseIcon-01.png"
+                Stretch="Fill" />
+        </Grid>
+        <!--#endregion-->
+        <!--#region 内容栏-->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <!--#region 列表栏-->
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BorderBrush="#FF305EF0"
+                    BorderThickness="0,0,1,0">
+                    <StackPanel>
+                        <!--#region 列表标题-->
+                        <Grid Margin="0,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="51" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Width="20"
+                                Height="20"
+                                Margin="9,7,0,0"
+                                Source="/Image/MenuList20x20.png" />
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Height="33"
+                                Margin="9,20,0,5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="17"
+                                Text="歌单列表" />
+                        </Grid>
+                        <!--#endregion-->
+                        <!--  ViewBox包裹的控件都会按比例缩放  -->
+                        <Viewbox>
+                            <ScrollViewer
+                                x:Name="SongListScrollView"
+                                Width="85"
+                                Height="170"
+                                Margin="5,10,5,0"
+                                Background="#FFFAFAFA"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden">
+                                <StackPanel Orientation="Vertical">
+                                    <!--#region ListBox循环绑定数组-->
+                                    <ListBox
+                                        x:Name="lbSongList"
+                                        Width="85"
+                                        Height="170"
+                                        BorderThickness="0,0,0,0"
+                                        ContextMenu="{StaticResource SongListPopMenu}"
+                                        ItemsSource="{Binding SongLists}"
+                                        MouseDown="lbSongList_MouseDown"
+                                        MouseWheel="ListBox_MouseWheel"
+                                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                        SelectedItem="lbSongList_Selected">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    x:Name="songListItem"
+                                                    MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
+                                                    MouseMove="songListItem_MouseMove"
+                                                    MouseRightButtonDown="TextBlock_MouseRightButtonDown"
+                                                    Tag="{Binding SongListId}"
+                                                    Text="{Binding SongListName}" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <!--#endregion-->
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Viewbox>
+                    </StackPanel>
+                </Border>
+                <!--#endregion-->
+                <!--#region 歌曲列表容器栏-->
+                <Grid
+                    x:Name="MainPanel"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <!--#region 操作层-->
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="21*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="22*" />
+                                <ColumnDefinition Width="25*" />
+                            </Grid.ColumnDefinitions>
+                            <!--#region MP3存放路径文本框-->
+                            <Viewbox Grid.Row="0" Grid.Column="0">
+                                <TextBox
+                                    xmlns:local="clr-namespace:WpfNetMusic.Library"
+                                    x:Name="txtFolderPath"
+                                    Width="123"
+                                    Height="16"
+                                    Margin="5,1,5,0"
+                                    Padding="5,2,0,0"
+                                    HorizontalContentAlignment="Left"
+                                    VerticalContentAlignment="Center"
+                                    local:WatermarkService.IsWatermarkEnabled="True"
+                                    local:WatermarkService.Watermark="请输入MP3存放路径"
+                                    FontFamily="Microsoft YaHei UI Light"
+                                    FontSize="10"
+                                    Foreground="#FF848181"
+                                    IsReadOnly="True"
+                                    Style="{DynamicResource TextBoxStyle1}">
+                                    <TextBox.Background>
+                                        <SolidColorBrush Opacity="0.3" Color="#7FDDDCDC" />
+                                    </TextBox.Background>
+                                </TextBox>
+                            </Viewbox>
+                            <!--#endregion-->
+                            <!--#region 浏览按钮-->
+                            <Viewbox Grid.Row="0" Grid.Column="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        x:Name="btnBrowseFolder"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Width="75"
+                                        Height="25"
+                                        Margin="3,2,3,0"
+                                        Cursor="Hand"
+                                        MouseDown="btnBrowseFolder_MouseDown"
+                                        Source="/Image/BrowseFolder.png" />
+                                </Grid>
+                            </Viewbox>
+                            <!--#endregion-->
+                            <!--#region 当前歌单名称-->
+                            <TextBlock
+                                x:Name="CurrentSongList"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="10"
+                                Text="歌单名称:"
+                                TextTrimming="WordEllipsis"
+                                TextWrapping="NoWrap" />
+                            <!--#endregion-->
+                            <!--#region 歌单操作按钮-->
+                            <Grid Grid.Row="0" Grid.Column="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Text="提示:可以将MP3拖拽至列播放列表添加文件" />
+                                <Grid Grid.Row="1" Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Text="提示:可以将列表歌曲拖拽至歌单移动文件" />
+                                </Grid>
+                            </Grid>
+                            <!--#endregion-->
+                        </Grid>
+                    </Grid>
+                    <!--#endregion-->
+                    <Popup
+                        x:Name="popup"
+                        AllowDrop="True"
+                        AllowsTransparency="True"
+                        HorizontalOffset="0"
+                        IsOpen="False"
+                        Placement="Relative"
+                        PlacementTarget="{Binding ElementName=MainWindowHandle}"
+                        PopupAnimation="Fade"
+                        StaysOpen="True"
+                        VerticalOffset="0">
+                        <Border
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="1">
+                            <StackPanel Width="50" Height="50">
+                                <Image x:Name="PopupImage" Source="/Image/NoCover.png" />
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                    <!--#region 歌曲列表-->
+                    <DataGrid
+                        x:Name="dg_MusicList"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        AllowDrop="True"
+                        Background="Transparent"
+                        CanUserResizeColumns="True"
+                        CanUserSortColumns="True"
+                        ContextMenu="{StaticResource DataGridPopMenu}"
+                        DragEnter="dg_MusicList_DragEnter"
+                        Drop="dg_MusicList_Drop"
+                        ItemsSource="{Binding MusicList}"
+                        MouseDoubleClick="dg_MusicList_MouseDoubleClick"
+                        MouseDown="dg_MusicList_MouseDown"
+                        Sorting="dg_MusicList_Sorting">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <EventSetter Event="MouseDown" Handler="DataGridCell_MouseDown" />
+                                <EventSetter Event="MouseLeftButtonDown" Handler="DataGridCell_MouseLeftButtonDown" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DataGridCell">
+                                            <Border
+                                                x:Name="Bg"
+                                                Background="Transparent"
+                                                UseLayoutRounding="True">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="Foreground" Value="#000000" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding Index}"
+                                CanUserResize="True"
+                                CanUserSort="True"
+                                Header="序号"
+                                SortMemberPath="Index" />
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding FileId}"
+                                CanUserResize="True"
+                                CanUserSort="True"
+                                Header="编号"
+                                SortMemberPath="FileId" />
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding Title}"
+                                CanUserResize="True"
+                                CanUserSort="True"
+                                Header="标题"
+                                SortMemberPath="Title" />
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding Artist}"
+                                CanUserResize="True"
+                                CanUserSort="True"
+                                Header="歌手"
+                                SortMemberPath="Artist" />
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding Album}"
+                                CanUserResize="True"
+                                CanUserSort="True"
+                                Header="所属唱片"
+                                SortMemberPath="Album" />
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding CreateTime}"
+                                CanUserResize="True"
+                                CanUserSort="True"
+                                Header="时间"
+                                SortMemberPath="CreateTime" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--#endregion-->
+                    <!--#region 没有文件层-->
+                    <StackPanel
+                        x:Name="NoFile"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        Orientation="Vertical"
+                        Visibility="Hidden">
+                        <Image
+                            Width="350"
+                            Height="350"
+                            Margin="0,10,0,0"
+                            Source="/Image/NoMusic.png" />
+                    </StackPanel>
+                    <!--#endregion-->
+                </Grid>
+                <!--#endregion-->
+                <!--#region 播放容器-->
+                <Grid
+                    x:Name="PlayerPanel"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    ShowGridLines="False"
+                    Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.09*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Horizontal">
+                        <Image
+                            Width="50"
+                            Height="30"
+                            Margin="5,0,0,0"
+                            Cursor="Hand"
+                            MouseDown="Image_MouseDown"
+                            Source="/Image/arrows01.png" />
+                        <Viewbox>
+                            <TextBlock
+                                Margin="5,3,0,0"
+                                FontSize="30"
+                                Foreground="#2792C1"
+                                Text="返回列表" />
+                        </Viewbox>
+                    </StackPanel>
+                    <!--#region 播放容器-->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <!--#region 唱片层-->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Viewbox>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <MediaElement
+                                        x:Name="mediaPlayer"
+                                        Width="0"
+                                        Height="0"
+                                        LoadedBehavior="Manual" />
+                                    <!--#region 唱片背景-->
+                                    <Image
+                                        Width="30"
+                                        Height="30"
+                                        Margin="5,0,5,0"
+                                        Source="/Image/disc.png" />
+                                    <!--#endregion-->
+                                    <!--#region 歌曲封面-->
+                                    <Image
+                                        x:Name="MusicCover"
+                                        Width="20"
+                                        Height="20"
+                                        Margin="7,0,7,0"
+                                        RenderTransformOrigin="0.5,0.5"
+                                        Source="/Image/NoCover.png"
+                                        Stretch="Fill">
+                                        <Image.Clip>
+                                            <RectangleGeometry
+                                                RadiusX="180"
+                                                RadiusY="180"
+                                                Rect="0,0,20,20" />
+                                        </Image.Clip>
+                                        <Image.RenderTransform>
+                                            <RotateTransform x:Name="AngleRotate" />
+                                        </Image.RenderTransform>
+                                    </Image>
+                                    <!--#endregion-->
+                                    <!--#region 唱针-->
+                                    <Image
+                                        x:Name="Stylus"
+                                        Width="15"
+                                        Height="25"
+                                        Margin="12,-15,0,0"
+                                        Source="/Image/stylus01.png">
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform />
+                                                <SkewTransform />
+                                                <RotateTransform Angle="{Binding StylusAngle}" />
+                                                <!--普通角度<RotateTransform Angle="-35" />-->
+                                                <!--播放角度<RotateTransform Angle="-25" />-->
+                                                <TranslateTransform />
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                    <!--#endregion-->
+                                </Grid>
+                            </Viewbox>
+                        </Grid>
+                        <!--#endregion-->
+                        <!--#region 歌曲信息层-->
+                        <Viewbox Grid.Row="0" Grid.Column="1">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock
+                                    x:Name="tbSongTitle"
+                                    Padding="3,0,3,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="3"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="tbSongFileId"
+                                    Padding="3,0,3,0"
+                                    FontSize="1"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="tbSongFileName"
+                                    Padding="3,0,3,0"
+                                    FontSize="1"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="tbSongAlbum"
+                                    Padding="3,0,3,0"
+                                    FontSize="1"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="tbSongArtist"
+                                    Padding="3,0,3,0"
+                                    FontSize="1"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="tbSongFileSize"
+                                    Padding="3,0,3,0"
+                                    FontSize="1"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    x:Name="tbSongDuration"
+                                    Padding="3,0,3,0"
+                                    FontSize="1"
+                                    FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FF8FC5C3" />
+                                            <GradientStop Offset="1" Color="#FF1D9E9A" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </StackPanel>
+                        </Viewbox>
+                        <!--#endregion-->
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
+                <!--#endregion-->
+            </Grid>
+            <!--#endregion-->
+            <!--#region 底部播放栏-->
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                BorderBrush="#FF305EF0"
+                BorderThickness="0,1,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <!--#region 当前播放歌曲层-->
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            x:Name="MiniCover"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Width="35"
+                            Height="35"
+                            Margin="8,5,0,5"
+                            Source="/Image/NoCover.png"
+                            Stretch="Fill">
+                            <Image.Clip>
+                                <RectangleGeometry
+                                    RadiusX="5"
+                                    RadiusY="5"
+                                    Rect="0,0,35,35" />
+                            </Image.Clip>
+                        </Image>
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Orientation="Vertical">
+                            <TextBlock
+                                x:Name="tbMiniSongTitle"
+                                Margin="2,7,0,0"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Text="">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Color="#FF35CB53" />
+                                        <GradientStop Offset="1" Color="#FF1166BD" />
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock
+                                x:Name="tbMiniSongArtist"
+                                Margin="2,6,0,0"
+                                FontSize="15"
+                                FontWeight="Bold"
+                                Text="">
+                                <TextBlock.Foreground>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0.162" Color="#FF35CB53" />
+                                        <GradientStop Offset="1" Color="#FFBD93D2" />
+                                        <GradientStop Offset="0.009" Color="#FF3F8A47" />
+                                        <GradientStop Offset="0.749" Color="#FFD4BA56" />
+                                    </RadialGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region 播放控制层-->
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="310">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            x:Name="BtnPlaySequence"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Width="25"
+                            Height="25"
+                            Cursor="Hand"
+                            MouseDown="BtnPlaySequence_MouseDown"
+                            Source="/Image/LoopPlayIcon.png"
+                            ToolTip="" />
+                        <Image
+                            x:Name="PrevoiusBtn"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="25"
+                            Height="25"
+                            Cursor="Hand"
+                            MouseDown="PrevoiusBtn_MouseDown"
+                            Source="/Image/PreviousBtn.png" />
+                        <!--#region 播放按钮-->
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Width="40"
+                            Height="40"
+                            Background="#FFF1EBEB"
+                            BorderBrush="#FFC8BDBD"
+                            Click="Button_Click">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="25" />
+                                    <Setter Property="BorderBrush" Value="#FFA1BACE" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Image
+                            x:Name="PlayButtonImage"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Width="25"
+                            Height="25"
+                            Margin="5,0,0,0"
+                            Cursor="Hand"
+                            MouseDown="PlayButtonImage_MouseDown"
+                            Source="/Image/PlayIcon.png" />
+                        <!--#endregion-->
+                        <Image
+                            x:Name="NextButton"
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            Width="25"
+                            Height="25"
+                            Cursor="Hand"
+                            MouseDown="NextButton_MouseDown"
+                            Source="/Image/NextBtnIcon.png" />
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="5"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Cursor="Hand"
+                            FontFamily="Microsoft YaHei UI"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            MouseDown="TextBlock_MouseDown"
+                            Text="词" />
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region 音量控制-->
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Orientation="Horizontal">
+                        <Image
+                            x:Name="VolumeIcon"
+                            Width="25"
+                            Height="25"
+                            Margin="5,0,0,0"
+                            Cursor="Hand"
+                            MouseDown="VolumeIcon_MouseDown"
+                            Source="/Image/VolumeIcon.png" />
+                        <Slider
+                            x:Name="SliderVolume"
+                            Width="135"
+                            Height="20"
+                            Margin="3,5,0,0"
+                            Style="{DynamicResource SliderStyle}"
+                            Thumb.DragCompleted="SliderVolume_DragCompleted" />
+                    </StackPanel>
+                    <!--#endregion-->
+                    <!--#region 进度条-->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="516">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="0.2*" />
+                        </Grid.ColumnDefinitions>
+                        <!--#region 当前播放进度-->
+                        <TextBlock
+                            x:Name="CurrentPlayTime"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#FFC5C2C2"
+                            Text="00:00:00" />
+                        <!--#endregion-->
+                        <Slider
+                            x:Name="CurrentMusicSlider"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="0,5,0,0"
+                            Style="{DynamicResource SliderStyle}"
+                            Thumb.DragCompleted="CurrentMusicSlider_DragCompleted"
+                            Thumb.DragStarted="CurrentMusicSlider_DragStarted"
+                            ValueChanged="CurrentMusicSlider_ValueChanged" />
+                        <!--#region 当前播放进度-->
+                        <TextBlock
+                            x:Name="CurrentMusicDuration"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#FFC5C2C2"
+                            Text="00:00:00" />
+                        <MediaElement
+                            Grid.Column="1"
+                            Width="100"
+                            Height="33"
+                            Margin="99,22,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
+                        <!--#endregion-->
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
+            </Border>
+            <!--#endregion-->
+        </Grid>
+        <!--#endregion-->
+    </Grid>
+</Window>

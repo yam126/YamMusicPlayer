@@ -1,0 +1,314 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Logo16.ico</ApplicationIcon>
+	<TargetFrameworks>net6.0-windows</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataAccess\**" />
+    <Compile Remove="Snowflake.Net\**" />
+    <EmbeddedResource Remove="DataAccess\**" />
+    <EmbeddedResource Remove="Snowflake.Net\**" />
+    <None Remove="DataAccess\**" />
+    <None Remove="Snowflake.Net\**" />
+    <Page Remove="DataAccess\**" />
+    <Page Remove="Snowflake.Net\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Helper.html" />
+    <None Remove="Image\1688933864837353472.jpeg" />
+    <None Remove="Image\AddIcon.png" />
+    <None Remove="Image\arrows01.png" />
+    <None Remove="Image\arrows02.png" />
+    <None Remove="Image\BrowseFolder.png" />
+    <None Remove="Image\CloseIcon-01.fw.png" />
+    <None Remove="Image\CloseIcon-01.png" />
+    <None Remove="Image\DeleteIcon.png" />
+    <None Remove="Image\disc.png" />
+    <None Remove="Image\EditIcon.png" />
+    <None Remove="Image\folder.png" />
+    <None Remove="Image\HelpImage\img01.png" />
+    <None Remove="Image\HelpImage\img02.png" />
+    <None Remove="Image\HelpImage\img03.png" />
+    <None Remove="Image\HelpImage\img04.png" />
+    <None Remove="Image\HelpImage\img05.png" />
+    <None Remove="Image\HelpImage\img06.gif" />
+    <None Remove="Image\HelpImage\img07.gif" />
+    <None Remove="Image\Logo.png" />
+    <None Remove="Image\LogoMaterial-01.png" />
+    <None Remove="Image\LogoMaterial-02.png" />
+    <None Remove="Image\LogoMaterial-03.fw.png" />
+    <None Remove="Image\LoopPlayIcon.png" />
+    <None Remove="Image\MagnifyingGlassWhite.png" />
+    <None Remove="Image\MaxIcon-01.fw.png" />
+    <None Remove="Image\MaxIcon-01.png" />
+    <None Remove="Image\MenuList.png" />
+    <None Remove="Image\MenuList20x20.fw.png" />
+    <None Remove="Image\MenuList20x20.png" />
+    <None Remove="Image\MinCloseIcon-01.fw.png" />
+    <None Remove="Image\MinCloseIcon-01.png" />
+    <None Remove="Image\MuteIcon.png" />
+    <None Remove="Image\NextBtnIcon.png" />
+    <None Remove="Image\NoCover.png" />
+    <None Remove="Image\NoMusic.png" />
+    <None Remove="Image\NormalIcon-01.fw.png" />
+    <None Remove="Image\NormalIcon-01.png" />
+    <None Remove="Image\PauseIcon.png" />
+    <None Remove="Image\PlayButtonMaterial.png" />
+    <None Remove="Image\PlayIcon.png" />
+    <None Remove="Image\PreviousBtn.png" />
+    <None Remove="Image\RandomPlayIcon.png" />
+    <None Remove="Image\SequencePlayOne.png" />
+    <None Remove="Image\SingleLoopPlay.png" />
+    <None Remove="Image\SplashScreenBG.png" />
+    <None Remove="Image\StopBtn.png" />
+    <None Remove="Image\stylus01.png" />
+    <None Remove="Image\VolumeIcon.png" />
+    <None Remove="Image\WhiteMenuIcon.png" />
+    <None Remove="Image\WinCloseIcon.png" />
+    <None Remove="Image\WinCloseIcon01.png" />
+    <None Remove="Image\WinCloseIcon03.png" />
+    <None Remove="Image\WinMaxIcon.png" />
+    <None Remove="Image\WinMaxIcon01.png" />
+    <None Remove="Image\WinMinIcon.png" />
+    <None Remove="Image\WinMinIcon01.png" />
+    <None Remove="Image\WinNormarlIcon01.png" />
+    <None Remove="Logo16.ico" />
+    <None Remove="Logo32.ico" />
+    <None Remove="WpfNetMusicDB.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>50a7e9b0-70ef-11d1-b75a-00a0c90564fe</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="IWshRuntimeLibrary">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Helper.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\1688933864837353472.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\arrows01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AduSkin" Version="1.1.1.9" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="116.0.130" />
+    <PackageReference Include="HandyControl" Version="3.4.0" />
+    <PackageReference Include="HandyControls" Version="3.4.5" />
+    <PackageReference Include="ID3" Version="0.6.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="MimeTypesMap" Version="1.0.8" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\AddIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\arrows02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\BrowseFolder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\CloseIcon-01.fw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\CloseIcon-01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\DeleteIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\disc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\EditIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\folder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img03.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img04.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img05.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img06.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\HelpImage\img07.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\LogoMaterial-01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\LogoMaterial-02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\LogoMaterial-03.fw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\LoopPlayIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MagnifyingGlassWhite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MaxIcon-01.fw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MaxIcon-01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MenuList.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MenuList20x20.fw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MenuList20x20.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MinCloseIcon-01.fw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MinCloseIcon-01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MuteIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\NextBtnIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\NoCover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\NoMusic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\NormalIcon-01.fw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\NormalIcon-01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PauseIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PlayButtonMaterial.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PlayIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\PreviousBtn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\RandomPlayIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\SequencePlayOne.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\SingleLoopPlay.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\SplashScreenBG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\StopBtn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\stylus01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\VolumeIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WhiteMenuIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinCloseIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinCloseIcon01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinCloseIcon03.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinMaxIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinMaxIcon01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinMinIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinMinIcon01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\WinNormarlIcon01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Logo16.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Logo32.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="WpfNetMusicDB.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Snowflake.Net\Snowflake.Net.csproj" />
+  </ItemGroup>
+  
+</Project>

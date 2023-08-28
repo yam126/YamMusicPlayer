@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>E:\WPFProject\WpfNetMusic\WpfNetMusic\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="About.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CloseAlert.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="EditSongList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ErrorMsgDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HelpApp.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LyricMusic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MoveMusic.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SplashScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControl\ImageButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="About.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Animation\AngleAnimation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CloseAlert.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="EditSongList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ErrorMsgDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HelpApp.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LyricMusic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MoveMusic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style\Combobox_Base.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style\ScrollStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style\SilderStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Style\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControl\ImageButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
